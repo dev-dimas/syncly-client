@@ -18,13 +18,12 @@ export default function FAQ() {
             },
             {
               question: "Can I use Syncly for free?",
-              answer:
-                "Yes, Syncly always be free for individuals and small teams.",
+              answer: "Yes, Syncly always be free for individuals or teams.",
             },
             {
               question: "Is my data secure with Syncly?",
               answer:
-                "Absolutely. We use industry-standard encryption and security measures to protect your data. Our Enterprise plan offers additional advanced security features.",
+                "Absolutely. We use industry-standard encryption and security measures to protect your data.",
             },
             {
               question: "How can I get started with Syncly?",

@@ -41,7 +41,7 @@ export default function Pricing() {
     >
       <div className="max-w-5xl mx-auto flex flex-col items-center justify-center">
         <h2 className="text-3xl font-bold text-center">
-          Choose the Perfect Plan for You
+          Choose the Perfect Pricing Plan for You
         </h2>
         <p className="mt-5 mb-12 text-sm italic text-black/80 im-joking">
           Umm... I'm Joking. It's Free Forever.

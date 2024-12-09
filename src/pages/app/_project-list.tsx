@@ -1,6 +1,12 @@
-import { Archive, ChevronRight, FolderClosed, Hash, Star } from "lucide-react";
+import {
+  Archive,
+  Check,
+  ChevronRight,
+  FolderClosed,
+  Hash,
+  Star,
+} from "lucide-react";
 import React from "react";
-
 import {
   Collapsible,
   CollapsibleContent,
@@ -19,6 +25,8 @@ import {
   SidebarProvider,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
+import { Link } from "react-router-dom";
+import { useParams } from "@/router";
 
 const data = {
   navMain: [
@@ -29,11 +37,11 @@ const data = {
       items: [
         {
           title: "Fav 1",
-          url: "#",
+          url: "1",
         },
         {
           title: "Fav 2",
-          url: "#",
+          url: "2",
         },
       ],
     },
@@ -44,11 +52,11 @@ const data = {
       items: [
         {
           title: "Project 1",
-          url: "#",
+          url: "3",
         },
         {
           title: "Project 2",
-          url: "#",
+          url: "4",
         },
       ],
     },
@@ -59,11 +67,11 @@ const data = {
       items: [
         {
           title: "Archive 1",
-          url: "#",
+          url: "5",
         },
         {
           title: "Archive 2",
-          url: "#",
+          url: "6",
         },
       ],
     },
@@ -73,6 +81,8 @@ const data = {
 export default function ProjectList({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
+  const params = useParams("/app/projects/:projectId");
+
   return (
     <SidebarProvider>
       <Sidebar {...props}>
@@ -103,13 +113,21 @@ export default function ProjectList({
                               <SidebarMenuSubItem key={item.title}>
                                 <SidebarMenuSubButton
                                   asChild
-                                  isActive={false}
-                                  className="font-medium text-xs text-[#7B849E]"
+                                  isActive={
+                                    item.url === params.projectId ? true : false
+                                  }
+                                  className="font-medium  text-xs text-[#7B849E]"
                                 >
-                                  <a href={item.url}>
-                                    <Hash color="#7B849E" />
+                                  <Link to={`/app/projects/${item.url}`}>
+                                    <Hash />
                                     {item.title}
-                                  </a>
+                                    {item.url === params.projectId && (
+                                      <Check
+                                        strokeWidth={3.5}
+                                        className="absolute right-2"
+                                      />
+                                    )}
+                                  </Link>
                                 </SidebarMenuSubButton>
                               </SidebarMenuSubItem>
                             ))}

@@ -4,12 +4,13 @@ import LqipImage from "@/components/ui/lqip-image";
 import { Separator } from "@/components/ui/separator";
 import useNotifQueryState from "@/hooks/useNotifQueryState";
 import { cn } from "@/lib/utils";
-import { Bell, FolderClosed } from "lucide-react";
+import { ArrowLeft, Bell, FolderClosed } from "lucide-react";
 import { ReactNode } from "react";
 import { Link, Outlet } from "react-router-dom";
 import SubSidebar from "./_sub-sidebar";
 import { Popover, PopoverContent } from "@/components/ui/popover";
 import { PopoverTrigger } from "@radix-ui/react-popover";
+import { useParams } from "@/router";
 
 const MENU_LIST: { label: string; icon: ReactNode }[] = [
   {
@@ -24,10 +25,16 @@ const MENU_LIST: { label: string; icon: ReactNode }[] = [
 
 export default function Layout() {
   const { isNotificationsOpen, setIsNotificationsOpen } = useNotifQueryState();
+  const params = useParams("/app/projects/:projectId");
 
   return (
     <>
-      <div className="flex min-h-dvh w-full">
+      <div
+        className={cn(
+          "flex min-h-dvh w-full transition-transform duration-300 ease-in-out",
+          params.projectId ? "scale-90 overflow-hidden" : "scale-100"
+        )}
+      >
         <div className="min-h-dvh w-full flex relative">
           <div className="h-dvh pt-6 p-3 md:p-6 border-r border-border sticky top-0">
             <nav className="h-full w-8 md:w-12 flex flex-col gap-6">
@@ -89,7 +96,21 @@ export default function Layout() {
           <SubSidebar />
         </div>
       </div>
-      <Outlet />
+      <div
+        className={cn(
+          "absolute z-20 top-0 bg-white shadow-2xl w-full min-h-dvh transition-[left,opacity] duration-300 ease-in-out px-4 py-5 flex flex-col gap-4",
+          params.projectId
+            ? "opacity-100 left-[0%]"
+            : "opacity-0 left-full w-0 min-h-0 h-0 p-0"
+        )}
+      >
+        {params.projectId && (
+          <Link to="/app">
+            <ArrowLeft />
+          </Link>
+        )}
+        <Outlet />
+      </div>
     </>
   );
 }

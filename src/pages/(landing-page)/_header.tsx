@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import LqipImage from "@/components/ui/lqip-image";
 import useAnimatedScroll from "@/hooks/useAnimatedScroll";
 import { Link } from "@/router";
-import { Menu } from "lucide-react";
 import { Link as LinkScroll } from "react-router-dom";
 
 export default function Header() {
@@ -51,11 +50,6 @@ export default function Header() {
           <Link to="/sign-up">Sign up</Link>
         </Button>
       </div>
-
-      {/* Mobile menu button */}
-      <Button variant="ghost" size="icon" className="md:hidden">
-        <Menu className="h-6 w-6" />
-      </Button>
     </header>
   );
 }

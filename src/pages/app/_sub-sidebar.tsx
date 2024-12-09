@@ -51,7 +51,7 @@ function ProjectSidebar() {
               Personal
             </button>
           </div>
-          <Separator className="-mx-6 w-[calc(100%+48px)] sticky top-[116px] z-[1]" />
+          <Separator className="-mx-6 w-[calc(100%+32px)] sticky top-[116px] z-[1]" />
           <ProjectList />
         </div>
       </div>
