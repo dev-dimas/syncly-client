@@ -1,13 +1,4 @@
 import {
-  Archive,
-  Check,
-  ChevronRight,
-  FolderClosed,
-  Hash,
-  Star,
-} from "lucide-react";
-import React from "react";
-import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
@@ -25,8 +16,17 @@ import {
   SidebarProvider,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
-import { Link } from "react-router-dom";
 import { useParams } from "@/router";
+import {
+  Archive,
+  Check,
+  ChevronRight,
+  FolderClosed,
+  Hash,
+  Star,
+} from "lucide-react";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const data = {
   navMain: [
@@ -87,7 +87,7 @@ export default function ProjectList({
     <SidebarProvider>
       <Sidebar {...props}>
         <SidebarContent>
-          <SidebarGroup className="p-0 mt-4">
+          <SidebarGroup className="p-0 mt-4 mb-6">
             <SidebarMenu>
               {data.navMain.map((item, index) => (
                 <>
@@ -102,7 +102,7 @@ export default function ProjectList({
                       <CollapsibleTrigger asChild className="pb-3">
                         <SidebarMenuButton className="font-bold text-base">
                           {item.icon}
-                          {item.title}
+                          <span className="truncate">{item.title}</span>
                           <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
                         </SidebarMenuButton>
                       </CollapsibleTrigger>
@@ -120,7 +120,9 @@ export default function ProjectList({
                                 >
                                   <Link to={`/app/projects/${item.url}`}>
                                     <Hash />
-                                    {item.title}
+                                    <span className="truncate">
+                                      {item.title}
+                                    </span>
                                     {item.url === params.projectId && (
                                       <Check
                                         strokeWidth={3.5}

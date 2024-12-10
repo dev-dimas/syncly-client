@@ -89,10 +89,12 @@
 }
 
 * {
+  scrollbar-width: thin;
   font-family: "SFProDisplay", sans-serif;
   /* background-color: red; */
 }
 
 body {
   background-color: white;
+  overflow-x: hidden;
 }

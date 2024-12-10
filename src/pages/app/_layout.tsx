@@ -4,7 +4,7 @@ import LqipImage from "@/components/ui/lqip-image";
 import { Separator } from "@/components/ui/separator";
 import useNotifQueryState from "@/hooks/useNotifQueryState";
 import { cn } from "@/lib/utils";
-import { ArrowLeft, Bell, FolderClosed } from "lucide-react";
+import { ArrowLeft, Bell, FolderClosed, Hash } from "lucide-react";
 import { ReactNode } from "react";
 import { Link, Outlet } from "react-router-dom";
 import SubSidebar from "./_sub-sidebar";
@@ -28,11 +28,13 @@ export default function Layout() {
   const params = useParams("/app/projects/:projectId");
 
   return (
-    <>
+    <div className="flex w-full">
       <div
         className={cn(
-          "flex min-h-dvh w-full transition-transform duration-300 ease-in-out",
-          params.projectId ? "scale-90 overflow-hidden" : "scale-100"
+          "flex min-h-dvh w-full transition-transform duration-300 ease-in-out md:transition-none md:duration-0 md:w-fit md:fixed md:top-0 md:left-0 md:z-10",
+          params.projectId
+            ? "scale-90 overflow-hidden md:scale-100 md:overflow-visible"
+            : "scale-100"
         )}
       >
         <div className="min-h-dvh w-full flex relative">
@@ -67,8 +69,10 @@ export default function Layout() {
                     <Link
                       to={
                         link.label === "Dashboard"
-                          ? "/app"
-                          : "/app?notifWindow=true"
+                          ? isNotificationsOpen
+                            ? { search: "" }
+                            : "/app"
+                          : { search: `?notifications=true` }
                       }
                     >
                       {link.icon}
@@ -98,19 +102,25 @@ export default function Layout() {
       </div>
       <div
         className={cn(
-          "absolute z-20 top-0 bg-white shadow-2xl w-full min-h-dvh transition-[left,opacity] duration-300 ease-in-out px-4 py-5 flex flex-col gap-4",
+          "absolute z-20 top-0 bg-white shadow-2xl min-h-dvh transition-[left,opacity] duration-300 ease-in-out px-4 py-5 flex flex-col gap-4 md:relative md:h-full max-md:w-full md:w-[calc(100%-396.8px)] md:transition-none md:duration-0 md:shadow-none md:right-0 md:z-0",
           params.projectId
             ? "opacity-100 left-[0%]"
-            : "opacity-0 left-full w-0 min-h-0 h-0 p-0"
+            : "opacity-0 left-full w-0 min-h-0 h-0 p-0",
+          "md:opacity-100 md:left-[396.8px]"
         )}
       >
-        {params.projectId && (
-          <Link to="/app">
+        {params.projectId ? (
+          <Link to="/app" className="md:hidden">
             <ArrowLeft />
           </Link>
+        ) : (
+          <div className="bg-[#F6F6F9] w-full min-h-dvh h-full hidden md:flex md:flex-col md:items-center md:justify-center text-gray-300 relative -top-12">
+            <Hash size={100} />
+            <span className="text-2xl font-medium">Choose a project</span>
+          </div>
         )}
         <Outlet />
       </div>
-    </>
+    </div>
   );
 }

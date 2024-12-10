@@ -11,7 +11,7 @@ export default function SubSidebar() {
   const { isNotificationsOpen } = useNotifQueryState();
 
   return (
-    <div className="flex-1 min-h-dvh">
+    <div className="flex-1 min-h-dvh md:flex-none md:w-full md:max-w-[300px] md:border-r md:border-border md:overflow-x-clip">
       {isNotificationsOpen ? <NotificationsSidebar /> : <ProjectSidebar />}
     </div>
   );
@@ -21,13 +21,13 @@ function ProjectSidebar() {
   const [isTeamTabSelected, setIsTeamTabSelected] = useState<boolean>(true);
 
   return (
-    <div className="w-full px-6 flex flex-col">
+    <div className="w-full px-6 flex flex-col md:max-h-dvh md:h-full">
       <h1 className="text-2xl py-4 font-bold sticky top-0 bg-white z-10">
         All Projects
       </h1>
-      <div className="flex flex-col w-full">
+      <div className="flex-1 flex flex-col w-full">
         {/* Project Tabs */}
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col relative md:h-full">
           {/* Project Tabs Item */}
           <div className="flex w-full sticky top-[64px] z-10 bg-white">
             <button
@@ -51,7 +51,7 @@ function ProjectSidebar() {
               Personal
             </button>
           </div>
-          <Separator className="-mx-6 w-[calc(100%+32px)] sticky top-[116px] z-[1]" />
+          <Separator className="-mx-6 w-[calc(100%+48px)] sticky top-[116px] z-[1] md:w-dvw" />
           <ProjectList />
         </div>
       </div>
@@ -88,7 +88,7 @@ function NotificationsSidebar() {
       <Helmet>
         <title>Notifications – Syncly</title>
       </Helmet>
-      <div className="w-full px-6 flex flex-col">
+      <div className="w-full px-6 flex flex-col md:max-h-dvh md:h-full md:overflow-y-auto">
         <h1 className="text-2xl py-4 font-bold sticky top-0 bg-white z-10">
           Notifications
         </h1>

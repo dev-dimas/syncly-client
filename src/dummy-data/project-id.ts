@@ -1,4 +1,4 @@
-type Task = {
+export type Task = {
   title: string;
   description: string;
   status: "Active" | "Paused" | "Completed";
@@ -12,7 +12,7 @@ type Task = {
   createdAt: string;
 };
 
-type ProjectIDPlaceholderType = {
+export type ProjectIDPlaceholderType = {
   title: string;
   member: {
     userId: string;
