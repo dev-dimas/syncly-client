@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 "use client";
 import * as React from "react";
 import { cn } from "@/lib/utils";
@@ -39,6 +40,7 @@ export const useAutosizeTextArea = ({
         textAreaElement.style.height = `${scrollHeight + offsetBorder}px`;
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [textAreaRef.current, triggerAutoSize]);
 };
 
@@ -53,10 +55,7 @@ type AutosizeTextAreaProps = {
   minHeight?: number;
 } & React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
-export const AutosizeTextarea = React.forwardRef<
-  AutosizeTextAreaRef,
-  AutosizeTextAreaProps
->(
+export const AutosizeTextarea = React.forwardRef<AutosizeTextAreaRef, AutosizeTextAreaProps>(
   (
     {
       maxHeight = Number.MAX_SAFE_INTEGER,

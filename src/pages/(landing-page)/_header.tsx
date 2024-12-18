@@ -1,12 +1,13 @@
-import logo from "@/assets/nft-3.jpg?lqip";
+import logo from "@/assets/logo.jpg?lqip";
 import { Button } from "@/components/ui/button";
 import LqipImage from "@/components/ui/lqip-image";
 import useAnimatedScroll from "@/hooks/useAnimatedScroll";
-import { Link } from "@/router";
+import { useModals } from "@/router";
 import { Link as LinkScroll } from "react-router-dom";
 
 export default function Header() {
   const { handleScroll } = useAnimatedScroll();
+  const modals = useModals();
 
   return (
     <header className="w-full flex items-center justify-between px-6 py-4 bg-white absolute top-0">
@@ -43,12 +44,10 @@ export default function Header() {
 
       {/* Login and sign up buttons */}
       <div className="flex items-center space-x-4">
-        <Button variant="ghost" asChild>
-          <Link to="/login">Log in</Link>
+        <Button variant="ghost" onClick={() => modals.open("/login")}>
+          Log in
         </Button>
-        <Button>
-          <Link to="/sign-up">Sign up</Link>
-        </Button>
+        <Button onClick={() => modals.open("/sign-up")}>Sign up</Button>
       </div>
     </header>
   );

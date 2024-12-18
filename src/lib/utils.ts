@@ -1,5 +1,9 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import relativeTime from "dayjs/plugin/relativeTime";
+import dayjs from "dayjs";
+
+dayjs.extend(relativeTime);
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -17,4 +21,8 @@ export function getInitials(input: string) {
     .map((word) => word[0])
     .join("")
     .toUpperCase();
+}
+
+export function getRelativeTime(date: string | Date) {
+  return dayjs().to(dayjs(date));
 }

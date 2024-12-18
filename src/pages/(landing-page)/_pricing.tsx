@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Link } from "@/router";
+import { useModals } from "@/router";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,6 +8,8 @@ import { CheckCircle } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Pricing() {
+  const modals = useModals();
+
   useGSAP(() => {
     gsap.set(".im-joking", { y: 50, opacity: 0 });
     gsap.to(".im-joking", {
@@ -63,8 +65,8 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
-            <Button className="w-full" asChild>
-              <Link to="/sign-up">Get Started</Link>
+            <Button className="w-full" onClick={() => modals.open("/sign-up")}>
+              Get Started
             </Button>
           </div>
         </div>
