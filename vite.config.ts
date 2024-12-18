@@ -6,7 +6,10 @@ import lqip from "vite-plugin-lqip";
 import removeConsole from "vite-plugin-remove-console";
 
 export default defineConfig({
-  plugins: [react(), generouted(), lqip(), removeConsole()],
+  plugins: [react(), generouted(), lqip(), removeConsole({ includes: ["log", "warn", "error"] })],
+  esbuild: {
+    drop: ["console", "debugger"],
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

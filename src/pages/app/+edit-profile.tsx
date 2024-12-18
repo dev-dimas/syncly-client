@@ -42,11 +42,11 @@ export default function EditProfile() {
       return;
     }
 
-    const formData = new FormData();
-    if (data.name !== user?.data.name) formData.append("name", data.name);
-    if (data.email !== user?.data.email) formData.append("email", data.email);
+    let body: Record<string, string> = {};
+    if (data.name !== user?.data.name) body = { ...body, name: data.name };
+    if (data.email !== user?.data.email) body = { ...body, email: data.email };
 
-    const res = await updateUser(formData);
+    const res = await updateUser(body);
 
     if (res.error) {
       toast.error((res.error as ApiError).message);
@@ -79,16 +79,17 @@ export default function EditProfile() {
               pointerEvents: isLoading || isLoadingUpdateUser ? "none" : "auto",
             },
           }}
+          onFormInit={(form) => form.setFocus("name")}
           values={{
-            name: isLoading || isLoadingUpdateUser ? "Loading..." : user?.data.name,
-            email: isLoading || isLoadingUpdateUser ? "Loading..." : user?.data.email,
+            name: isLoading ? "Loading..." : user?.data.name,
+            email: isLoading ? "Loading..." : user?.data.email,
           }}
           uiComponents={{
             SubmitButton: () => (
               <Button
                 type="submit"
                 className="w-full"
-                disabled={isLoading}
+                disabled={isLoading || isLoadingUpdateUser}
                 isLoading={isLoadingUpdateUser}
               >
                 Update

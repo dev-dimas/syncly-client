@@ -18,7 +18,7 @@ export const userApi = createApi({
       extraOptions: { isNeedToken: true },
       providesTags: ["User"],
     }),
-    updateUser: builder.mutation<ApiSuccess<User>, FormData>({
+    updateUser: builder.mutation<ApiSuccess<User>, Partial<Pick<User, "name" | "email">>>({
       query: (user) => ({ url: "/user", method: "PUT", body: user }),
       extraOptions: { isNeedToken: true },
       invalidatesTags: ["User"],

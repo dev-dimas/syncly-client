@@ -131,7 +131,12 @@ export default function ProjectList({
                       </CollapsibleContent>
                     </SidebarMenuItem>
                   </Collapsible>
-                  {index !== NAV_MAIN.length - 1 && <SidebarSeparator className="my-4" />}
+                  {index !== NAV_MAIN.length - 1 && (
+                    <SidebarSeparator
+                      className="my-4"
+                      key={`${category.title}-${NAV_MAIN[index + 1].title}`}
+                    />
+                  )}
                 </>
               ))}
             </SidebarMenu>
