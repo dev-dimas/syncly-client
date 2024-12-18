@@ -69,7 +69,7 @@ export default function CreateProject() {
             className="min-h-0 min-w-0 p-1 rounded-full m-0 aspect-square w-4 h-4 absolute top-4 right-4"
             variant="ghost"
             onClick={handleCloseModal}
-            isLoading={isLoading}
+            disabled={isLoading}
           >
             <X />
           </Button>
@@ -90,7 +90,7 @@ export default function CreateProject() {
               <Label id="isTeamProject">Create as a team project</Label>
             </div>
           </div>
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" isLoading={isLoading}>
             Create
           </Button>
         </AutoForm>
