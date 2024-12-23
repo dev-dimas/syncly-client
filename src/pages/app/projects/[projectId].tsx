@@ -94,33 +94,35 @@ export default function ProjectId() {
             </span>
           </p>
 
-          <div className="flex gap-3">
-            <AvatarStacking
-              key={project.data.project.id}
-              users={project?.data.project.members.map((member) => member.user) || []}
-              totalUsers={project?.data.total_members || 0}
-            />
-            <Button
-              className="text-sm font-medium rounded-lg text-black border border-[#E0E5EB]"
-              variant="ghost"
-              onClick={() =>
-                modals.open("/app/projects/manage-members", {
-                  at: "/app/projects/:projectId",
-                  params,
-                  replace: true,
-                  state: {
-                    isOwner: project.data.project.isProjectOwner,
-                    ownerId: project.data.project.ownerId,
-                    totalMembers: project.data.total_members,
-                  },
-                  viewTransition: true,
-                })
-              }
-            >
-              <Users />
-              <span>{project.data.project.isProjectOwner ? "Manage" : "View"} Members</span>
-            </Button>
-          </div>
+          {project.data.project.isTeamProject && (
+            <div className="flex gap-3">
+              <AvatarStacking
+                key={project.data.project.id}
+                users={project?.data.project.members.map((member) => member.user) || []}
+                totalUsers={project?.data.total_members || 0}
+              />
+              <Button
+                className="text-sm font-medium rounded-lg text-black border border-[#E0E5EB]"
+                variant="ghost"
+                onClick={() =>
+                  modals.open("/app/projects/manage-members", {
+                    at: "/app/projects/:projectId",
+                    params,
+                    replace: true,
+                    state: {
+                      isOwner: project.data.project.isProjectOwner,
+                      ownerId: project.data.project.ownerId,
+                      totalMembers: project.data.total_members,
+                    },
+                    viewTransition: true,
+                  })
+                }
+              >
+                <Users />
+                <span>{project.data.project.isProjectOwner ? "Manage" : "View"} Members</span>
+              </Button>
+            </div>
+          )}
 
           <Button
             className="w-full mt-2 text-sm font-medium rounded-lg text-black border border-[#E0E5EB]"
